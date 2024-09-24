@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Consulta de Alumnos</title>
+</head>
+<body>
+    <header>
+        <h1>Consulta de Alumnos</h1>
+    </header>
+
+    <section>
+        <form id="formAlumno">
+            <label for="numControl">Ingrese Número de Control:</label>
+            <input type="text" id="numControl">
+            <button type="button" onclick="buscarAlumno()">Buscar</button>
+        </form>
+        <div id="resultadoAlumno"></div>
+    </section>
+
+    <script>
+        function buscarAlumno() {
+            const numControl = document.getElementById("numControl").value;
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    mostrarAlumno(this, numControl);
+                }
+            };
+            xhttp.open("GET", "alumnos.xml", true);
+            xhttp.send();
+        }
+
+        function mostrarAlumno(xml, numControl) {
+            const xmlDoc = xml.responseXML;
+            const alumnos = xmlDoc.getElementsByTagName("alumno");
+            let resultado = "";
+            for (let i = 0; i < alumnos.length; i++) {
+                if (alumnos[i].getElementsByTagName("numControl")[0].childNodes[0].nodeValue == numControl) {
+                    resultado += "<h2>" + alumnos[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue + "</h2>";
+                    resultado += "<p>Matrícula: " + alumnos[i].getElementsByTagName("numControl")[0].childNodes[0].nodeValue + "</p>";
+                    resultado += "<p>Edad: " + alumnos[i].getElementsByTagName("edad")[0].childNodes[0].nodeValue + "</p>";
+                    resultado += "<p>Carrera: " + alumnos[i].getElementsByTagName("carrera")[0].childNodes[0].nodeValue + "</p>";
+                    resultado += "<p>Promedio: " + alumnos[i].getElementsByTagName("promedio")[0].childNodes[0].nodeValue + "</p>";
+                    break;
+                }
+            }
+            document.getElementById("resultadoAlumno").innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>
