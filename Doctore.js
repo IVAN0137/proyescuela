@@ -1,4 +1,3 @@
-// JavaScript Document
 // Función para cargar los doctores desde el archivo JSON
 function cargarDoctores(callback) {
     fetch('doctores.json')
