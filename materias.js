@@ -1,34 +1,25 @@
 // JavaScript Document
-materiasCallback({
-    "materias": [
-        {
-            "nombre": "Programación",
-            "codigo": "IS101",
-            "profesor": "Dr. López",
-            "creditos": 8,
-            "aula": "A1"
-        },
-        {
-            "nombre": "Redes",
-            "codigo": "IS102",
-            "profesor": "Mtro. García",
-            "creditos": 6,
-            "aula": "A2"
-        },
-        {
-            "nombre": "Bases de Datos",
-            "codigo": "IS103",
-            "profesor": "Mtro. Pérez",
-            "creditos": 7,
-            "aula": "A3"
-        },
-        {
-            "nombre": "Seguridad Informática",
-            "codigo": "IS104",
-            "profesor": "Dra. Martínez",
-            "creditos": 8,
-            "aula": "A4"
-        }
-        // Puedes agregar más materias aquí
-    ]
-});
+// Función para cargar los doctores desde el archivo JSON
+function cargarDoctores(callback) {
+    fetch('doctores.json')
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch(error => console.error('Error al cargar los doctores:', error));
+}
+
+// Función para mostrar los doctores en la página
+function mostrarDoctores(doctores) {
+    let resultado = '';
+    doctores.forEach(doctor => {
+        resultado += `<h3>${doctor.nombre}</h3>
+                      <p>ID: ${doctor.id}</p>
+                      <p>Especialidad: ${doctor.especialidad}</p>
+                      <p>Años de Experiencia: ${doctor.experiencia}</p>`;
+    });
+    document.getElementById('resultadoDoctor').innerHTML = resultado;
+}
+
+// Llamar a la función para cargar doctores al cargar la página
+window.onload = function() {
+    cargarDoctores(mostrarDoctores);
+};

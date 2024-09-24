@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Consulta de Pacientes - Hospital General</title>
+</head>
+<body>
+    <header>
+        <h1>Consulta de Pacientes</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Buscar Paciente</h2>
+        <form id="formPaciente">
+            <label for="criterioBusqueda">Seleccione un criterio de búsqueda:</label>
+            <select id="criterioBusqueda">
+                <option value="id">ID del Paciente</option>
+                <option value="nombre">Nombre del Paciente</option>
+                <option value="diagnostico">Diagnóstico</option>
+                <option value="fechaIngreso">Fecha de Ingreso</option>
+            </select>
+            <input type="text" id="valorBusqueda" placeholder="Ingrese valor de búsqueda">
+            <button type="button" onclick="buscarPaciente()">Buscar</button>
+        </form>
+        <div id="resultadoPaciente"></div>
+    </section>
+
+    <script>
+        function buscarPaciente() {
+            const criterioBusqueda = document.getElementById("criterioBusqueda").value;
+            const valorBusqueda = document.getElementById("valorBusqueda").value.toLowerCase();
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    mostrarPaciente(this, criterioBusqueda, valorBusqueda);
+                }
+            };
+            xhttp.open("GET", "pacientes.xml", true);
+            xhttp.send();
+        }
+
+        function mostrarPaciente(xml, criterioBusqueda, valorBusqueda) {
+            const xmlDoc = xml.responseXML;
+            const pacientes = xmlDoc.getElementsByTagName("paciente");
+            let resultado = "";
+            for (let i = 0; i < pacientes.length; i++) {
+                let valorPaciente = pacientes[i].getElementsByTagName(criterioBusqueda)[0].childNodes[0].nodeValue.toLowerCase();
+                
+                if (valorPaciente.includes(valorBusqueda)) {
+                    resultado += "<h2>" + pacientes[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue + "</h2>";
+                    resultado += "<p>ID: " + pacientes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue + "</p>";
+                    resultado += "<p>Edad: " + pacientes[i].getElementsByTagName("edad")[0].childNodes[0].nodeValue + "</p>";
+                    resultado += "<p>Diagnóstico: " + pacientes[i].getElementsByTagName("diagnostico")[0].childNodes[0].nodeValue + "</p>";
+                    resultado += "<p>Fecha de Ingreso: " + pacientes[i].getElementsByTagName("fechaIngreso")[0].childNodes[0].nodeValue + "</p>";
+                }
+            }
+            if (resultado === "") {
+                resultado = "<p>No se encontraron resultados para la búsqueda.</p>";
+            }
+            document.getElementById("resultadoPaciente").innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>
+

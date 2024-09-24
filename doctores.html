@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Consulta de Doctores - Hospital General</title>
+</head>
+<body>
+    <header>
+        <h1>Consulta de Doctores</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Buscar Doctor</h2>
+        <form id="formDoctor">
+            <label for="criterioBusquedaDoctor">Seleccione un criterio de búsqueda:</label>
+            <select id="criterioBusquedaDoctor">
+                <option value="id">ID del Doctor</option>
+                <option value="nombre">Nombre del Doctor</option>
+                <option value="especialidad">Especialidad</option>
+                <option value="experiencia">Años de Experiencia</option>
+            </select>
+            <input type="text" id="valorBusquedaDoctor" placeholder="Ingrese valor de búsqueda">
+            <button type="button" onclick="buscarDoctor()">Buscar</button>
+        </form>
+        <div id="resultadoDoctor"></div>
+    </section>
+
+    <script>
+        function doctoresCallback(data) {
+            window.doctoresData = data.doctores;
+        }
+
+        function buscarDoctor() {
+            const criterioBusquedaDoctor = document.getElementById("criterioBusquedaDoctor").value;
+            const valorBusquedaDoctor = document.getElementById("valorBusquedaDoctor").value.toLowerCase();
+            let resultado = "";
+            for (const doctor of window.doctoresData) {
+                let valorDoctor = doctor[criterioBusquedaDoctor]
+
+            }
+        }
+    </script>
+</body>
+</html>

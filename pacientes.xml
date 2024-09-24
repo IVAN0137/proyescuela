@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pacientes>
+    <paciente>
+        <id>P001</id>
+        <nombre>Juan Martínez</nombre>
+        <edad>30</edad>
+        <sexo>Masculino</sexo>
+        <diagnostico>Hipertensión</diagnostico>
+    </paciente>
+    <paciente>
+        <id>P002</id>
+        <nombre>Ana Rodríguez</nombre>
+        <edad>25</edad>
+        <sexo>Femenino</sexo>
+        <diagnostico>Diabetes</diagnostico>
+    </paciente>
+    <paciente>
+        <id>P003</id>
+        <nombre>Pedro González</nombre>
+        <edad>40</edad>
+        <sexo>Masculino</sexo>
+        <diagnostico>Asma</diagnostico>
+    </paciente>
+    <paciente>
+        <id>P004</id>
+        <nombre>Laura López</nombre>
+        <edad>28</edad>
+        <sexo>Femenino</sexo>
+        <diagnostico>Infección respiratoria</diagnostico>
+    </paciente>
+    <paciente>
+        <id>P005</id>
+        <nombre>Carlos Sánchez</nombre>
+        <edad>50</edad>
+        <sexo>Masculino</sexo>
+        <diagnostico>Artritis</diagnostico>
+    </paciente>
+</pacientes>
