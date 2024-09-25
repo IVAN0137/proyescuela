@@ -1,12 +1,23 @@
-callback([
-    { "id": "D001", "nombre": "Dr. Juan Pérez", "especialidad": "Cardiología", "experiencia": 10 },
-    { "id": "D002", "nombre": "Dra. Ana Gómez", "especialidad": "Pediatría", "experiencia": 8 },
-    { "id": "D003", "nombre": "Dr. Luis Martínez", "especialidad": "Cirugía General", "experiencia": 12 },
-    { "id": "D004", "nombre": "Dra. Laura Fernández", "especialidad": "Neurología", "experiencia": 5 },
-    { "id": "D005", "nombre": "Dr. Carlos Torres", "especialidad": "Oncología", "experiencia": 15 },
-    { "id": "D006", "nombre": "Dra. Sofia López", "especialidad": "Medicina Interna", "experiencia": 7 },
-    { "id": "D007", "nombre": "Dr. Pedro Sánchez", "especialidad": "Rehabilitación Física", "experiencia": 6 },
-    { "id": "D008", "nombre": "Dra. Marta Ruiz", "especialidad": "Oftalmología", "experiencia": 9 },
-    { "id": "D009", "nombre": "Dr. Javier Castillo", "especialidad": "Ginecología", "experiencia": 11 },
-    { "id": "D010", "nombre": "Dra. Elena Morales", "especialidad": "Traumatología", "experiencia": 4 }
-]);
+document.getElementById('buscarMedico').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const id = document.getElementById('idMedico').value;
+    fetch('medicos.json')
+        .then(response => response.json())
+        .then(data => {
+            const medicos = data.Medicos;
+            const medico = medicos.find(m => m.ID == id);
+            if(medico){
+                document.getElementById('resultadoMedico').innerHTML = `
+                    <h3>Detalles del Médico</h3>
+                    <p><strong>ID:</strong> ${medico.ID}</p>
+                    <p><strong>Nombre:</strong> ${medico.Nombre}</p>
+                    <p><strong>Especialidad:</strong> ${medico.Especialidad}</p>
+                    <p><strong>Teléfono:</strong> ${medico.Telefono}</p>
+                    <p><strong>Correo:</strong> ${medico.Correo}</p>
+                `;
+            } else {
+                document.getElementById('resultadoMedico').innerHTML = `<p>No se encontró ningún médico con el ID ${id}.</p>`;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});

@@ -2,48 +2,31 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital XYZ - Médicos</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Consulta de Doctores - Hospital General</title>
+    <script src="medicos.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Consulta de Doctores</h1>
+        <h1>Hospital XYZ</h1>
         <nav>
-            <a href="index.html">Inicio</a>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="pacientes.html">Pacientes</a></li>
+            </ul>
         </nav>
     </header>
-
-    <section>
-        <h2>Buscar Doctor</h2>
-        <form id="formDoctor">
-            <label for="criterioBusquedaDoctor">Seleccione un criterio de búsqueda:</label>
-            <select id="criterioBusquedaDoctor">
-                <option value="id">ID del Doctor</option>
-                <option value="nombre">Nombre del Doctor</option>
-                <option value="especialidad">Especialidad</option>
-                <option value="experiencia">Años de Experiencia</option>
-            </select>
-            <input type="text" id="valorBusquedaDoctor" placeholder="Ingrese valor de búsqueda">
-            <button type="button" onclick="buscarDoctor()">Buscar</button>
+    <main>
+        <h2>Información de Médicos</h2>
+        <form id="buscarMedico">
+            <label for="idMedico">Número de Control (ID):</label>
+            <input type="number" id="idMedico" name="idMedico" required>
+            <button type="submit">Buscar</button>
         </form>
-        <div id="resultadoDoctor"></div>
-    </section>
-
-    <script>
-        function doctoresCallback(data) {
-            window.doctoresData = data.doctores;
-        }
-
-        function buscarDoctor() {
-            const criterioBusquedaDoctor = document.getElementById("criterioBusquedaDoctor").value;
-            const valorBusquedaDoctor = document.getElementById("valorBusquedaDoctor").value.toLowerCase();
-            let resultado = "";
-            for (const doctor of window.doctoresData) {
-                let valorDoctor = doctor[criterioBusquedaDoctor]
-
-            }
-        }
-    </script>
+        <div id="resultadoMedico"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Hospital XYZ. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
